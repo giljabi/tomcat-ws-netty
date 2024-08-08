@@ -1,0 +1,69 @@
+server:
+  port: 8082
+
+netty:
+  tcp:
+    port: 8090
+  boss:
+    thread:
+      count: 1  #bossGroup 클라이언트 연결을 수락하는 역할 1로 설정하는 것이 일반적
+  worker:
+    thread:
+      count: 4 #기본값은 CPU 코어 수의 2배, vcpu 2개면 4개로 설정하는 것이 일반적
+gateway:
+  jwt:
+    secret: 4RT/2hAAJmC6i2FzmezBbaCVMD9FtsuExyjaVWJ5xRA= #vkfflek20181221rmadydlf
+    expirationInMs: 604800000 #86400000
+    type: Bearer
+  server-topic: serverchannel  #서버채널, 대소문자를 구분하여 사용해야 함...삽질의 원인
+  logging:
+    message-limit: 200 #AOP에서 사용할 메시지 길이
+
+springdoc:
+  version: 1.0.0
+
+spring:
+  messages:
+    basename: messages/messages
+    encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+
+mybatis:
+  mapper-locations: classpath:mybatis/mappers/*.xml
+  type-aliases-package: kr.giljabi.gateway.admin.model
+  configuration:
+    cache-enabled: true
+    lazy-loading-enabled: false
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    use-generated-keys: false
+    auto-mapping-behavior: partial
+    default-statement-timeout: 25
+    safe-row-bounds-enabled: false
+    map-underscore-to-camel-case: true
+    local-cache-scope: session
+    jdbc-type-for-null: other
+
+project:
+  version: @project.version@
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,prometheus"
+  metrics:
+    export:
+      prometheus:
+        enabled: true

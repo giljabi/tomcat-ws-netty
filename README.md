@@ -4,6 +4,14 @@
 ### [gateway](gateway/README.md)
 ### [test-client](test-client/README.md)
 
+
+## 워크플로우
+* client login: /api/token
+* client connect netty
+* client send message
+* server receive message
+
+
 ## connect url
 * http://localhost:8082/swagger-ui/index.html
 * http://localhost:8082/monitor/list
@@ -18,8 +26,8 @@
 
 
 ## 프로젝트 구성
-- gateway (서버-부스 TCP, 확장가능성 있음)
-
+- gateway : http, netty(socket)
+- test-client : netty(socket)
 
 ## 개발환경
 * JDK 1.8
@@ -27,7 +35,7 @@
 * PostgreSQL 9.6 이상
 
 ## Active profile
-* local
+* gateway: local
 
 
 ## Build

@@ -1,0 +1,83 @@
+/*        .dynamic-div {
+            margin: 10px;
+            padding: 10px;
+            background-color: lightblue;
+            border: 1px solid blue;
+        }*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+tr td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 4px;
+    text-height: 10px;
+}
+th {
+    background-color: #f2f2f2;
+    text-height: 10px;
+    padding: 4px;
+}
+
+@keyframes fadeTrans {
+    from { background-color: #00ff00; }
+    to { background-color: white; }
+}
+.fadeEffectTrans {
+    animation-name: fadeTrans;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
+}
+@keyframes fadeBlueToWhite {
+    from { background-color: #009dff; }
+    to { background-color: white; }
+}
+.fadeEffectBlueToWhite {
+    animation-name: fadeBlueToWhite;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
+}
+@keyframes fadeRedToCoral {
+    from { background-color: red; }
+    to { background-color: #FDCEBEFF; }
+}
+.fadeEffectRedToCoral {
+    animation-name: fadeRedToCoral;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
+}
+/* reboot*/
+@keyframes fadeReboot {
+    from { background-color: #ffc400; }
+    to { background-color: white; }
+}
+.fadeEffectReboot {
+    animation-name: fadeReboot;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
+}
+/* shutdown*/
+@keyframes fadeShutdown {
+    from { background-color: #ff0000; }
+    to { background-color: #ff7676; }
+}
+.fadeEffectShutdown {
+    animation-name: fadeShutdown;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
+}
+/* health*/
+@keyframes fadeHealth {
+    from { background-color: #00eaff; }
+    to { background-color: #ffffff; }
+}
+.fadeEffectHealth {
+    animation-name: fadeHealth;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
+}
+#time {
+    font-size: 22px;
+    color: #333;
+}
