@@ -5,7 +5,8 @@
 ### [test-client](test-client/README.md)
 
 
-## 워크플로우
+## 워크플로우 작성중....
+[workflow.drawio](doc/workflow.drawio)
 * client login: /api/token
 * client connect netty
 * client send message
@@ -17,7 +18,7 @@
 * http://localhost:8082/monitor/list
 * http://localhost:8082/actuator/prometheus
 
-
+ 
 ## 개요
 * web socket을 이용한 서버-클라이언트 통신
   * client --> /api/token : tomcat 접속을 위한 
