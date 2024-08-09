@@ -40,7 +40,16 @@
 ## 개발환경
 * JDK 1.8
 * Spring boot 2.4.0
-* PostgreSQL 9.6 이상
+* PostgreSQL 9.6 이상, 단 11 이상 권장하며 아래 트리거에서 PROCEDURE 대신 FUNCTION을 사용해야 함
+  * [table.sql](gateway/src/main/resource/sql/table.sql)
+```sql
+--Postgresql 11 이상은 EXECUTE FUNCTION을 사용해야 함
+DROP TRIGGER IF EXISTS mq_server_notify_trigger ON mq_server;
+CREATE TRIGGER mq_server_notify_trigger
+    AFTER INSERT OR UPDATE ON mq_server
+    FOR EACH ROW EXECUTE PROCEDURE fn_mq_server_notify_trigger();
+```
+
 
 ## Active profile
 * gateway: local
