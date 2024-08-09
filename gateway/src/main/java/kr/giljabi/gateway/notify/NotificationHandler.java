@@ -93,7 +93,9 @@ public class NotificationHandler implements Consumer<PGNotification>{
             String response = message + newLine;
             //serviceHandler.channelWrite(channel, response, "sendClient"); //이렇게 사용하면 안됨...
             channel.writeAndFlush(response);
-            stompController.sendMsg(response);
+
+            //웹에서 모니터링을 할 필요가 있는 경우에만 사용
+            //stompController.sendMsg(response);
             log.info("sendClient={}", response);
         } else {
             log.warn("Inactive channel found: {}", channel);

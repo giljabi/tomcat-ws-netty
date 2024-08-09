@@ -44,7 +44,7 @@ public class HealthyRunner implements Runnable {
                 ctx.channel().writeAndFlush(message + NEWLINE);
                 log.info(ctx.channel() + " Healthy send    : " + message);
                 //Thread.sleep(new Random().nextInt(5000));
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (Exception e) {
                 //e.printStackTrace();
                 System.out.println("HealthyRunner Exception:" + running);

@@ -1,6 +1,7 @@
 package kr.giljabi.gateway.nettyhandler;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import kr.giljabi.gateway.nettyhandler.sr.CommonHeader;
 import kr.giljabi.gateway.nettyhandler.sr.LoginRecvDTO;
 import kr.giljabi.gateway.nettyhandler.sr.LoginSendDTO;
@@ -138,7 +139,8 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
         boothStatusRepository.save(boothStatus);
 
         //websocket으로 전송
-        stompController.sendMsg(new Gson().toJson(header));
+        Gson gson = new GsonBuilder().serializeNulls().create();    //null 데이터를 포함해서 json으로 변환
+        stompController.sendMsg(gson.toJson(header));
 
 /*        //update를 사용하면 select를 하지 않아도 되므로 성능이 향상되나....?? 좀 더 고민이 필요...
         boothStatusRepository.updateStatusByTerminalId(
@@ -193,8 +195,8 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
         String sendMessage = new Gson().toJson(commonHeader);
         channel.writeAndFlush(sendMessage + System.getProperty("line.separator"));
 
-        //websocket으로 전송
-        stompController.sendMsg(new Gson().toJson(commonHeader));
+        //websocket으로 전송, 클라이언트로 전송하므로 모니터링 할 필요는 없음, 만약 필요하다면 사용
+        //stompController.sendMsg(new Gson().toJson(commonHeader));
     }
 
     private void addChannelDatabase(Channel channel, String terminalId) {

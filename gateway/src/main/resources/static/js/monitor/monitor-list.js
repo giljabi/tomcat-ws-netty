@@ -178,7 +178,7 @@ heart-beat:60000,60000
             appendCell('srType', recvData.srType);
 
             console.log('recvData.data=' + recvData);
-            if(recvData.data != null && recvData.data != undefined) {
+            if(recvData.data != null) {
                 let dataLength = JSON.stringify(recvData.data).length;
                 if (dataLength > 0) {
                     if (dataLength > 50)
