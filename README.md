@@ -11,8 +11,7 @@
 ## 워크플로우
 * [workflow.drawio](doc/workflow.drawio)
 
-![img_1.png](doc/workflow.png){width="600px"}
-
+![workflow](doc/workflow.png){width="600px"}
 
 ## connect url
 * http://localhost:8082/swagger-ui/index.html
