@@ -9,7 +9,7 @@ mvn clean package -DskipTests -f pom.xml
 ## test 
 * userinfo에 N개의 사용자가 있어야 함 --> gatweay의 table.sql 참조
 ```text
-"%JAVA_11_HOME%\bin\java" -jar target\test-client-1.0.jar 2
+"%JAVA_11_HOME%\bin\java" -jar target\gateway-client-1.0.jar 2
 ```
 ![img.png](doc/intellij.png)
 

@@ -5,8 +5,8 @@
 
 # README
 ### [gateway](gateway/README.md)
-### [test-client](test-client/README.md)
-* 1개 프로젝트로 되어 있지만 디버깅을 쉽게 하려면 gateway, test-client 각각 intellij에서 열어서 실행하면 됨
+### [gateway-client](gateway-client/README.md)
+* 1개 프로젝트로 되어 있지만 디버깅을 쉽게 하려면 gateway, gateway-client 각각 intellij에서 열어서 실행하면 됨
 
 ## 워크플로우
 * [workflow.drawio](doc/workflow.drawio)
@@ -34,8 +34,8 @@
 ```
 
 ## 프로젝트 구성
-- gateway : http, netty(socket)
-- test-client : netty(socket)
+* gateway : http, netty(socket)
+* gateway-client : netty(socket)
 
 ## 개발환경
 * JDK 1.8
@@ -59,10 +59,10 @@ CREATE TRIGGER mq_server_notify_trigger
 * 메이븐 프로젝트 빌드
 ```
 mvn clean package -pl gateway -am -DskipTests
-mvn clean package -pl test-client -am -DskipTests
+mvn clean package -pl gateway-client -am -DskipTests
 ```
 * test client 실행
   * table.sql에 있는 사용자수 만큼 실행
 ```text
-"%JAVA_11_HOME%\bin\java" -jar target\test-client-1.0.jar 2
+"%JAVA_11_HOME%\bin\java" -jar target\gateway-client-1.0.jar 2
 ```

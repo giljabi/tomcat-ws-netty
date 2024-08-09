@@ -39,7 +39,7 @@ UPDATE SET
 # temninal Monitoring
 * websocket을 이용, 클라이언트 접속시 모니터링 가능
 * http://localhost:8082/monitor/list
-* link [test-client](test-client)
+* link [gateway-client](gateway-client)
   * 쓰레드를 이용한 실시간 모니터링 테스트 ClientTestApplication numberOfClients에서 조정할 수 있음
   * numberOfClients는 userinfo에 등록되어있어야 하며, admon0~admin9까지 등록된 사용자수까지 사용하면 됨
   * ![모니터링화면](doc/monitor.png)
@@ -101,11 +101,5 @@ gateway_netty_channel_connections{application="Gateway-netty",} 10.0
 ### ClientTestApplication start
 * "%JAVA_11_HOME%\bin\java" -jar target\test-client-1.0.jar 1
 
-### test-client
-* https://test-client
-* terminalId:ALL 전체 클라이언트, ID: 개별 클라이언트
-
-
-## websocket
 
 

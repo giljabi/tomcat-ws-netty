@@ -34,7 +34,7 @@ public class ClientTestApplication implements CommandLineRunner {
             System.out.println("Number of clients: " + args[0]);
         } else {
             System.out.println("\n================================================");
-            System.out.println("Usage: java -jar target\\test-client-1.0.jar 1~10");
+            System.out.println("Usage: java -jar target\\gateway-client-1.0.jar 1~10");
             System.out.println("================================================");
             return;
         }
