@@ -13,20 +13,32 @@
 </head>
 
 <div style="display: flex; align-items: center;">
-    <div id="time" style="width: 500px;">Subscription time...</div>
-    <div><input type="checkbox" id="monitorType">Fixed Monitoring</div>
+    <div id="time" style="width: 350px;">Subscription time...</div>
+    <div style="width: 100px;font-size: 12px;"><input type="checkbox" id="monitorType">Fix item</div>
+    <div>
+        <select id="command" style="width: 100px;">
+            <option value="">command select</option>
+            <option value="reboot">reboot</option>
+            <option value="cmd">cmd</option>
+        </select>
+        <select id="terminalIDList" style="width: 80px;">
+            <option value="ALL">ALL</option>
+        </select>
+        <input type="button" id="sendCommand" value="send">
+    </div>
 </div>
 
 <div id="monitorContainer" class="dynamic-div">
-    <table id="monitorTable" style="width: 820px;border: blue">
+    <table id="monitorTable" style="width: 860px;border: blue;font-size: 12px;">
         <thead>
         <tr>
-            <th style="width: 100px;">TerminalID</th>
-            <th style="width: 250px;">sendTime</th>
-            <th style="width: 250px;">recvTime</th>
-            <th style="width: 90px;">Command</th>
-            <th style="width: 60px;">status</th>
-            <th style="width: 70px;">srType</th>
+            <th style="width: 80px;">TerminalID</th>
+            <th style="width: 150px;">sendTime</th>
+            <th style="width: 150px;">recvTime</th>
+            <th style="width: 70px;">Command</th>
+            <th style="width: 50px;">status</th>
+            <th style="width: 80px;">srType</th>
+            <th style="width: 280px;">recvData</th>
         </tr>
         </thead>
     </table>

@@ -13,6 +13,7 @@ tr td {
     text-align: center;
     padding: 4px;
     text-height: 10px;
+
 }
 th {
     background-color: #f2f2f2;
@@ -78,6 +79,6 @@ th {
     animation-fill-mode: forwards; /* 유지되는 마지막 속성값을 유지 */
 }
 #time {
-    font-size: 22px;
+    font-size: 14px;
     color: #333;
 }

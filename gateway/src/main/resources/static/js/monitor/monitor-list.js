@@ -166,10 +166,27 @@ heart-beat:60000,60000
                 appendCell('terminalId', recvData.terminalId);
                 appendCell('sendTime', '');
                 appendCell('recvTime', recvData.time);
+
+                //add TerminalIDList
+                $('#terminalIDList').append($('<option>', {
+                    value: recvData.terminalId,
+                    text: recvData.terminalId
+                }));
             }
             appendCell('command', recvData.command);
             appendCell('status', recvData.status);
             appendCell('srType', recvData.srType);
+
+            console.log('recvData.data=' + recvData);
+            if(recvData.data != null && recvData.data != undefined) {
+                let dataLength = JSON.stringify(recvData.data).length;
+                if (dataLength > 0) {
+                    if (dataLength > 50)
+                        appendCell('recvData', JSON.stringify(recvData.data).substring(0, 50)); //일부만 표시
+                    else
+                        appendCell('recvData', JSON.stringify(recvData.data).substring(0, 50));
+                }
+            }
 
             const { className, callFunction } = commandsEffect[recvData.command] || commandsEffect['default'];
             if(monitorType) {   //모니터링 타입 체크박스가 체크되어 있는 경우
@@ -191,4 +208,33 @@ heart-beat:60000,60000
             }
         }
     }
+
+    $('#sendCommand').click(function() {
+        let selectedCommand = $('#command').val();
+        let selectedTerminalID = $('#terminalIDList').val();
+
+        let requestObject = {};
+        requestObject.command = selectedCommand;
+        requestObject.terminalId = selectedTerminalID;
+        if(selectedCommand == 'cmd')
+            requestObject.script = 'dir /tmp';
+
+        if (selectedCommand) {
+            $.ajax({
+                url: '/api/toAgent',
+                contentType: 'application/json',
+                data: JSON.stringify(requestObject),
+                type: 'POST',
+                success: function(response) {
+                    console.log('Request was successful');
+                    // 필요한 경우, 응답(response) 데이터를 처리할 수 있습니다.
+                },
+                error: function(xhr, status, error) {
+                    console.error('Request failed: ' + error);
+                }
+            });
+        } else {
+            alert('Please select a command.');
+        }
+    });
 });

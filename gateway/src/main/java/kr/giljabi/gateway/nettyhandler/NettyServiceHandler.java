@@ -78,6 +78,7 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
                 .srType(SendRecvCode.response.name())
                 .terminalId(recvHeader.getTerminalId())
                 .time(CommonUtils.getCurrentTime(""))
+                .data(recvHeader.getData())
                 .build();
 
         try {
@@ -135,10 +136,11 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
 
         //select, update가 발생하지만 영향이 거의없어 무시함...
         boothStatusRepository.save(boothStatus);
+
         //websocket으로 전송
         stompController.sendMsg(new Gson().toJson(header));
 
-/*        //update를 사용하면 select를 하지 않아도 되므로 성능이 향상되나....
+/*        //update를 사용하면 select를 하지 않아도 되므로 성능이 향상되나....?? 좀 더 고민이 필요...
         boothStatusRepository.updateStatusByTerminalId(
                 boothStatus.getClientSendTime(),
                 boothStatus.getLocalIp(),
