@@ -6,11 +6,9 @@
 
 
 ## 워크플로우 작성중....
-[workflow.drawio](doc/workflow.drawio)
-* client login: /api/token
-* client connect netty
-* client send message
-* server receive message
+* [workflow.drawio](doc/workflow.drawio)
+
+![img_1.png](doc/workflow.png){: width="600px"}
 
 
 ## connect url
