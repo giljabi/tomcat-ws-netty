@@ -6,7 +6,7 @@
 # README
 ### [gateway](gateway/README.md)
 ### [test-client](test-client/README.md)
-
+* 1개 프로젝트로 되어 있지만 디버깅을 쉽게 하려면 gateway, test-client 각각 intellij에서 열어서 실행하면 됨
 
 ## 워크플로우
 * [workflow.drawio](doc/workflow.drawio)
