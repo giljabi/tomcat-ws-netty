@@ -56,8 +56,13 @@ CREATE TRIGGER mq_server_notify_trigger
 
 
 ## Build
-- 메이븐 프로젝트 빌드
+* 메이븐 프로젝트 빌드
 ```
 mvn clean package -pl gateway -am -DskipTests
 mvn clean package -pl test-client -am -DskipTests
+```
+* test client 실행
+  * table.sql에 있는 사용자수 만큼 실행
+```text
+"%JAVA_11_HOME%\bin\java" -jar target\test-client-1.0.jar 2
 ```
