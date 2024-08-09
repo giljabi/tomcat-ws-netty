@@ -16,7 +16,7 @@
 
   <modules>
     <module>gateway</module>
-    <module>test-client</module>
+    <module>gateway-client</module>
   </modules>
 
   <properties>
