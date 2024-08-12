@@ -195,7 +195,7 @@ public class NettyServiceHandler extends ChannelInboundHandlerAdapter {
         String sendMessage = new Gson().toJson(commonHeader);
         channel.writeAndFlush(sendMessage + System.getProperty("line.separator"));
 
-        //websocket으로 전송, 클라이언트로 전송하므로 모니터링 할 필요는 없음, 만약 필요하다면 사용
+        //websocket으로 전송, 클라이언트로 전송하므로 모니터링 할 필요는 없음
         //stompController.sendMsg(new Gson().toJson(commonHeader));
     }
 

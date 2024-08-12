@@ -9,9 +9,7 @@
 * 1개 프로젝트로 되어 있지만 디버깅을 쉽게 하려면 gateway, gateway-client 각각 intellij에서 열어서 실행하면 됨
 
 ## 워크플로우
-* [workflow.drawio](doc/workflow.drawio)
-
-![workflow](doc/workflow.png){width="600px"}
+![workflow.png](doc/workflow.png)
 
 ## connect url
 * http://localhost:8082/swagger-ui/index.html

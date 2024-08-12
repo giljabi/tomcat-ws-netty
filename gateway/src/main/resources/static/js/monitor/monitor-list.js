@@ -179,6 +179,7 @@ heart-beat:60000,60000
 
             console.log('recvData.data=' + recvData);
             if(recvData.data != null) {
+                console.log('recvData.data=' + JSON.stringify(recvData.data));
                 let dataLength = JSON.stringify(recvData.data).length;
                 if (dataLength > 0) {
                     if (dataLength > 50)
