@@ -11,11 +11,6 @@
 ## 워크플로우
 ![workflow.png](doc/workflow.png)
 
-## connect url
-* http://localhost:8082/swagger-ui/index.html
-* http://localhost:8082/monitor/list
-* http://localhost:8082/actuator/prometheus
-
  
 ## 개요
 * web socket을 이용한 서버-클라이언트 통신
@@ -31,8 +26,9 @@
 ```
 
 ## 프로젝트 구성
-* gateway : http, netty(socket)
+* gateway : http, websocket, netty(socket)
 * gateway-client : netty(socket)
+
 
 ## 개발환경
 * JDK 1.8
@@ -58,7 +54,18 @@ CREATE TRIGGER mq_server_notify_trigger
 mvn clean package -pl gateway -am -DskipTests
 mvn clean package -pl gateway-client -am -DskipTests
 ```
-* test client 실행
+
+### run server
+```text
+"%JAVA_11_HOME%\bin\java" -jar -Dspring.profiles.active=local gateway\target\gateway-1.0.0.jar
+```
+
+### connect url
+* http://localhost:8082/swagger-ui/index.html
+* http://localhost:8082/monitor/list
+* http://localhost:8082/actuator/prometheus
+
+### run test client
   * table.sql에 있는 사용자수 만큼 실행
 ```text
 "%JAVA_11_HOME%\bin\java" -jar target\gateway-client-1.0.jar 2
