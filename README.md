@@ -11,7 +11,7 @@
 ## 워크플로우
 ![workflow.png](doc/workflow.png)
 
- 
+
 ## 개요
 * web socket을 이용한 서버-클라이언트 통신
   * client --> /api/token : tomcat 접속을 위한 
@@ -68,5 +68,5 @@ mvn clean package -pl gateway-client -am -DskipTests
 ### run test client
   * table.sql에 있는 사용자수 만큼 실행
 ```text
-"%JAVA_11_HOME%\bin\java" -jar target\gateway-client-1.0.jar 2
+"%JAVA_11_HOME%\bin\java" -jar gateway-client\target\gateway-client-1.0.jar 2
 ```
