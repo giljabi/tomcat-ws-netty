@@ -67,7 +67,7 @@ public class ServerController {
 
     @Operation(summary = "Netty agent 로그인 토큰 발급", description = "ID, Password 또는 ??? 서버 데이터 모델링 후 정의")
     @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")})
-    @PostMapping("/api/token")
+    @PostMapping("/api/getToken")
     public CommonHeader getToken(@RequestBody TerminalTokenRequest request) {
         TokenResponse tokenResponse = userInfoService.findByUserId(request);
         CommonHeader response = CommonHeader.builder()

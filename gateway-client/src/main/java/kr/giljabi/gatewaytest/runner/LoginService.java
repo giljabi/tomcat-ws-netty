@@ -25,7 +25,7 @@ public class LoginService {
 
     public CommonHeader getToken(String userid, String password) {
         //System.out.println("Login.getToken wasPort:" + clientComponent.getWasPort());
-        String url = "http://localhost:" + clientComponent.getWasPort() + "/api/token";
+        String url = "http://localhost:" + clientComponent.getWasPort() + "/api/getToken";
         try {
             BoothTokenRequest requestBoothToken = new BoothTokenRequest();
             requestBoothToken.setUserId(userid);
