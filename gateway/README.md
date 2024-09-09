@@ -43,7 +43,7 @@ UPDATE SET
   * 쓰레드를 이용한 실시간 모니터링 테스트 ClientTestApplication numberOfClients에서 조정할 수 있음
   * numberOfClients는 userinfo에 등록되어있어야 하며, admon0~admin9까지 등록된 사용자수까지 사용하면 됨
   * ![모니터링화면](doc/monitor.png)
-
+  
 # websocket heartbeat
 * javascript debug 로그 출력
 ```javascript
