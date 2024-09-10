@@ -27,10 +27,12 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
     private String token;
     private String terminalId;
     List<HealthyRunner> healthyRunnerList = new ArrayList<HealthyRunner>();
-
+    private String osName;
     public ClientTestHandler(String token, String terminalId) {
         this.token = token;
         this.terminalId = terminalId;
+        this.osName = System.getProperty("os.name");
+
     }
 
     //5초마다 polling, 테스트를 위해 command를 랜덤하게 변경해서 전송
@@ -117,8 +119,15 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
                 String commnadArgs[] = recvCommand.split(" ");
                 //CmdRecvDTO recvDTO = gson.fromJson(data, CmdRecvDTO.class);
 
+                //인자를 받는 테스트는 보안문제가 있을수 있어 경로를 고정...
                 if (commnadArgs[0].compareToIgnoreCase("dir") == 0) {
-                    List<FileInfo> fileInfos = Cmd.dir(commnadArgs[1]);
+                    //List<FileInfo> fileInfos = Cmd.dir(commnadArgs[1]);
+                    List<FileInfo> fileInfos;
+                    if(osName.indexOf("Windows") >= 0)
+                        fileInfos = Cmd.dir("\\tmp"); //windows
+                    else
+                        fileInfos = Cmd.dir("/tmp"); //linux
+
                     CmdSendDTO cmdSendDTO = new CmdSendDTO();
                     cmdSendDTO.setCmd(recvCommand);
                     cmdSendDTO.setFileList(fileInfos);
