@@ -61,9 +61,9 @@ mvn clean package -pl gateway-client -am -DskipTests
 ```
 
 ### connect url
-* http://localhost:8082/swagger-ui/index.html
-* http://localhost:8082/monitor/list
-* http://localhost:8082/actuator/prometheus
+* http://localhost:8888/swagger-ui/index.html
+* http://localhost:8888/monitor/list
+* http://localhost:8888/actuator/prometheus
 
 ### run test client
   * table.sql에 있는 사용자수 만큼 실행
