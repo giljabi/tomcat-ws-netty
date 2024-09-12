@@ -17,6 +17,7 @@ public class ClientTestApplication implements CommandLineRunner {
     private ClientComponent clientComponent;
 
     private static int numberOfClients;
+    private static final Random random = new Random();
 
     @Autowired
     public ClientTestApplication(ClientComponent clientComponent) {
@@ -46,15 +47,13 @@ public class ClientTestApplication implements CommandLineRunner {
             String password = "qweqwe123";
             String terminalId = String.format("%d", 1000 + i);
 
-            Thread thread = new Thread(new ClientRunner(username,
-                    password,
-                    terminalId,
-                    clientComponent));
-            thread.start();
-
             try {
-                Thread.sleep(new Random().nextInt(5000));
-                //Thread.sleep(3000);
+                Thread thread = new Thread(new ClientRunner(username,
+                        password,
+                        terminalId,
+                        clientComponent));
+                thread.start();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

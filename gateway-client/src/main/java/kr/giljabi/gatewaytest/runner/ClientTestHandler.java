@@ -18,6 +18,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @Author : eahn.park@gmail.com
@@ -28,11 +29,12 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
     private String terminalId;
     List<HealthyRunner> healthyRunnerList = new ArrayList<HealthyRunner>();
     private String osName;
+    private static final Random random = new Random();
+
     public ClientTestHandler(String token, String terminalId) {
         this.token = token;
         this.terminalId = terminalId;
         this.osName = System.getProperty("os.name");
-
     }
 
     //5초마다 polling, 테스트를 위해 command를 랜덤하게 변경해서 전송
@@ -47,10 +49,10 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
                 .message(CommonUtils.getCurrentTime("") + ", " + CommandHealthCode.health.name() + " 했다....")
                 .build();
 
-        Thread healthy = new Thread(new HealthyRunner(ctx, commonResponse));
-        healthy.start();
         try {
-            Thread.sleep(100);
+            Thread healthy = new Thread(new HealthyRunner(ctx, commonResponse));
+            healthy.start();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,9 +99,6 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
         }
         System.out.println("recv command:" + commonRecvdata.getCommand() + ", terminalId:" + commonRecvdata.getTerminalId());
 
-        //Thread healthy = new Thread(new HealthyRunner(ctx, commonResponse));
-        //healthy.start();
-
         CommonHeader commonResponse;
         switch (commonRecvdata.getCommand()) {
             case "login":
@@ -138,6 +137,14 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
                 } else {
                     System.out.println("Invalid command: " + recvCommand);
                 }
+
+                try {
+                    int sleepTime = random.nextInt(2000);
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 //commonResponse.setData();
                 send(ctx, commonResponse);
                 break;

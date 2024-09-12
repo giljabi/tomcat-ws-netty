@@ -21,6 +21,7 @@ public class HealthyRunner implements Runnable {
     private CommonHeader commonResponse;
     private ChannelHandlerContext ctx;
     private volatile boolean running = true; // Control flag for the loop
+    private static final Random random = new Random();
 
     public HealthyRunner(ChannelHandlerContext ctx, CommonHeader response) {
         this.ctx = ctx;
@@ -38,15 +39,15 @@ public class HealthyRunner implements Runnable {
     @Override
     public void run() {
         while (running) {
-            System.out.println("HealthyRunner run:" + running);
             try {
+                Thread.sleep(random.nextInt(100) * 100);
+                System.out.println("HealthyRunner run:" + running);
+
                 String message = randomCommand();
                 ctx.channel().writeAndFlush(message + NEWLINE);
                 log.info(ctx.channel() + " Healthy send    : " + message);
-                //Thread.sleep(new Random().nextInt(5000));
-                Thread.sleep(5000);
             } catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
                 System.out.println("HealthyRunner Exception:" + running);
             }
         }

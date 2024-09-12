@@ -18,7 +18,7 @@ const commandsEffect = {
 }
 
 function updateTerminalFields(terminal, newTerminal) {
-    const fields = ['#sendTime', '#recvTime', '#command', '#status', '#srType'];
+    const fields = ['#sendTime', '#recvTime', '#command', '#status', '#srType', '#recvData'];
     fields.forEach(field => {
         terminal.find(field).text(newTerminal.find(field).text());
     });
@@ -145,68 +145,72 @@ heart-beat:60000,60000
     function showMessage(data) {
         let recvData = JSON.parse(data);
         let terminal = $('#monitorTable tr#' + recvData.terminalId);
-        if (recvData.command === 'inactive') {
-            terminal.find('#command').text(recvData.command);
-            terminal.find('#status').text(recvData.status);
-            terminal.addClass('fadeEffectRedToCoral');
-        } else {
-            //tr object를 만들고...
-            let newTerminal = $('<tr>').attr('id', recvData.terminalId); //새로운 tr object
-            const appendCell = (id, text) => newTerminal.append($('<td>').attr('id', id).text(text));
-            if (terminal.length > 0) { // 이미 존재하는 terminalId인 경우는 send, recv시간이 중요
-                appendCell('terminalId', recvData.terminalId);
-                if (recvData.srType === 'request') {
-                    appendCell('sendTime', recvData.time);
-                    appendCell('recvTime', '');
-                } else {
-                    appendCell('sendTime', $('#' + recvData.terminalId + ' #sendTime').text());
-                    appendCell('recvTime', recvData.time);
-                }
-            } else { // terminalId가 없다면...
-                appendCell('terminalId', recvData.terminalId);
-                appendCell('sendTime', '');
+
+        //tr object를 만들고...
+        let newTerminal = $('<tr style="height: 50px;">').attr('id', recvData.terminalId); //새로운 tr object
+        const appendCell = (id, text) => newTerminal.append($('<td>').attr('id', id).text(text));
+        if (terminal.length > 0) { // 이미 존재하는 terminalId인 경우는 send, recv시간이 중요
+            appendCell('terminalId', recvData.terminalId);
+            if (recvData.srType === 'request') {
+                appendCell('sendTime', recvData.time);
+                appendCell('recvTime', '');
+            } else {
+                appendCell('sendTime', $('#' + recvData.terminalId + ' #sendTime').text());
                 appendCell('recvTime', recvData.time);
-
-                //add TerminalIDList
-                $('#terminalIDList').append($('<option>', {
-                    value: recvData.terminalId,
-                    text: recvData.terminalId
-                }));
             }
-            appendCell('command', recvData.command);
-            appendCell('status', recvData.status);
-            appendCell('srType', recvData.srType);
+        } else { // terminalId가 없다면...
+            appendCell('terminalId', recvData.terminalId);
+            appendCell('sendTime', '');
+            appendCell('recvTime', recvData.time);
 
-            console.log('recvData.data=' + recvData);
-            if(recvData.data != null) {
-                console.log('recvData.data=' + JSON.stringify(recvData.data));
-                let dataLength = JSON.stringify(recvData.data).length;
-                if (dataLength > 0) {
-                    if (dataLength > 50)
-                        appendCell('recvData', JSON.stringify(recvData.data).substring(0, 50)); //일부만 표시
-                    else
-                        appendCell('recvData', JSON.stringify(recvData.data).substring(0, 50));
-                }
+            //add TerminalIDList
+            $('#terminalIDList').append($('<option>', {
+                value: recvData.terminalId,
+                text: recvData.terminalId
+            }));
+        }
+        appendCell('command', recvData.command);
+        appendCell('status', recvData.status);
+        appendCell('srType', recvData.srType);
+        let cmdMessage = JSON.stringify(recvData.data);
+        console.log('recvData.data=' + cmdMessage);
+        let dataLength = cmdMessage.length;
+        if (dataLength > 0 && recvData.srType === 'response') { //클라이언트에서 보낸 경우
+            if (dataLength > 80)
+                appendCell('recvData', JSON.stringify(recvData.data).substring(0, 80) + '...'); //일부만 표시
+            else
+                appendCell('recvData', JSON.stringify(recvData.data));
+        }
+
+
+/*        if(recvData.data != null) {
+            console.log('recvData.data=' + JSON.stringify(recvData.data));
+            let dataLength = JSON.stringify(recvData.data).length;
+            if (dataLength > 0 && recvData.srType === 'response') { //클라이언트에서 보낸 경우
+                if (dataLength > 100)
+                    appendCell('recvData', JSON.stringify(recvData.data).substring(0, 100) + '...'); //일부만 표시
+                else
+                    appendCell('recvData', JSON.stringify(recvData.data));
             }
+        }*/
 
-            const { className, callFunction } = commandsEffect[recvData.command] || commandsEffect['default'];
-            if(monitorType) {   //모니터링 타입 체크박스가 체크되어 있는 경우
-                if(terminal.length > 0) {   //기존 터미널정보 update
-                    terminal.removeAttr('class');
-                    updateTerminalFields(terminal, newTerminal);
-                    terminal.addClass(className);
-                    if (callFunction) { //tr에 적용된 className을 제거하는 함수 호출
-                        commandClassFadeout(recvData.terminalId, className);
-                    }
-                } else {
-                    newTerminal.addClass(className);
-                    $('#monitorTable').prepend(newTerminal);
+        const { className, callFunction } = commandsEffect[recvData.command] || commandsEffect['default'];
+        if(monitorType) {   //모니터링 타입 체크박스가 체크되어 있는 경우
+            if(terminal.length > 0) {   //기존 터미널정보 update
+                terminal.removeAttr('class');
+                updateTerminalFields(terminal, newTerminal);
+                terminal.addClass(className);
+                if (callFunction) { //tr에 적용된 className을 제거하는 함수 호출
+                    commandClassFadeout(recvData.terminalId, className);
                 }
             } else {
-                terminal.remove(); // 기존 tr 삭제
                 newTerminal.addClass(className);
                 $('#monitorTable').prepend(newTerminal);
             }
+        } else {
+            terminal.remove(); // 기존 tr 삭제
+            newTerminal.addClass(className);
+            $('#monitorTable').prepend(newTerminal);
         }
     }
 
