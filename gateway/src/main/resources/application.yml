@@ -17,7 +17,7 @@ gateway:
     type: Bearer
   server-topic: serverchannel  #서버채널, 대소문자를 구분하여 사용해야 함...삽질의 원인
   logging:
-    message-limit: 200 #AOP에서 사용할 메시지 길이
+    message-limit: 200 #AOP 로그에서 남기려는 메시지 길이, 0이면 전체
 
 springdoc:
   version: 1.0.0
