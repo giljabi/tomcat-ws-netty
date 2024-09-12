@@ -99,7 +99,9 @@ gateway_netty_channel_connections{application="Gateway-netty",} 10.0
 ![img.png](doc/intellij.png)
 
 ### ClientTestApplication start
-* "%JAVA_11_HOME%\bin\java" -jar target\test-client-1.0.jar 1
+```json
+"%JAVA_11_HOME%\bin\java" -jar target\gateway-client-1.0.jar 1
+```
 
 
 
