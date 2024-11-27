@@ -40,12 +40,13 @@ public class HealthyRunner implements Runnable {
     public void run() {
         while (running) {
             try {
-                Thread.sleep(random.nextInt(100) * 100);
-                System.out.println("HealthyRunner run:" + running);
-
                 String message = randomCommand();
                 ctx.channel().writeAndFlush(message + NEWLINE);
                 log.info(ctx.channel() + " Healthy send    : " + message);
+
+                int sleepTime = random.nextInt(100) * 200;
+                Thread.sleep(sleepTime);
+                System.out.println("HealthyRunner run sleepTime:" + sleepTime);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("HealthyRunner Exception:" + running);
@@ -67,3 +68,4 @@ public class HealthyRunner implements Runnable {
         return message;
     }
 }
+

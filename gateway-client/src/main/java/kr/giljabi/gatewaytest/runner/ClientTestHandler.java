@@ -139,7 +139,7 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
                 }
 
                 try {
-                    int sleepTime = random.nextInt(2000);
+                    int sleepTime = random.nextInt(100) * 200;
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
