@@ -63,7 +63,7 @@ public class ClientRunner implements Runnable {
                         }
                     });
 
-            Channel channel = bootstrap.connect("localhost",
+            Channel channel = bootstrap.connect(clientComponent.getNettyTargetIp(),
                     Integer.parseInt(clientComponent.getNettyPort())).sync().channel();
             channel.closeFuture().await();
         } catch (InterruptedException e) {
@@ -74,3 +74,4 @@ public class ClientRunner implements Runnable {
         }
     }
 }
+

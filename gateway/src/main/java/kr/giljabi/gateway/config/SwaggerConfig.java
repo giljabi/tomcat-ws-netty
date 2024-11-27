@@ -15,12 +15,9 @@ import java.util.Collections;
 @Configuration
 public class SwaggerConfig {
 	
-	@Value("${gateway.server.url}")
-	private String baseUrl;
-	
 	@Bean
 	  public OpenAPI openAPI(@Value("${springdoc.version}") String springdocVersion) {
-	    Info info = new Info()
+	  	Info info = new Info()
 				.title("GATEWAY-WEBSOCKET-NETTY API")
 				.version(springdocVersion)
 				.description("GATEWAY-WEBSOCKET-NETTY 상세소개");
@@ -30,13 +27,13 @@ public class SwaggerConfig {
 				, new SecurityScheme().name("bearerAuth").type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
 		);
 
-		OpenAPI openApi = new OpenAPI().addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+		OpenAPI openApi = new OpenAPI()
+				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
 				.components(bearerAuth)
-				.info(info)
-				.servers(Collections.singletonList(new Server().url(baseUrl))
-		);
+				.info(info);
 
 		return openApi;
 	  }
 
 }
+

@@ -37,7 +37,7 @@ public class ServerController {
     private final UserInfoService userInfoService;
     private final NettyServiceHandler serviceHandler;
 
-    @Operation(summary = "gateway를 통하여 Netty agent로 메시지 전송", description = "Agent 업무정의 후 사용함<br>" +
+    @Operation(summary = "gateway를 통하여 Netty agent로 메시지 전송", description = "Agent 기능정의 후 사용함<br>" +
             "command: reboot, shutdown<br>" +
             "terminalId: ALL, 1001~<br>" +
             "script: dir (windows command), <span style='color:red;'>dir 옵션으로 single back slash 사용불가, slash를 사용해야 함</span><br>" +

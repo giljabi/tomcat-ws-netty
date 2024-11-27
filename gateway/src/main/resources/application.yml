@@ -1,9 +1,9 @@
 server:
-  port: 8888
+  port: 9999
 
 netty:
   tcp:
-    port: 8090
+    port: 9980
   boss:
     thread:
       count: 1  #bossGroup 클라이언트 연결을 수락하는 역할 1로 설정하는 것이 일반적
@@ -36,21 +36,18 @@ spring:
     mode: HTML
     encoding: UTF-8
 
-mybatis:
-  mapper-locations: classpath:mybatis/mappers/*.xml
-  type-aliases-package: kr.giljabi.gateway.admin.model
-  configuration:
-    cache-enabled: true
-    lazy-loading-enabled: false
-    multiple-result-sets-enabled: true
-    use-column-label: true
-    use-generated-keys: false
-    auto-mapping-behavior: partial
-    default-statement-timeout: 25
-    safe-row-bounds-enabled: false
-    map-underscore-to-camel-case: true
-    local-cache-scope: session
-    jdbc-type-for-null: other
+  datasource:
+    url: ENC(yNoAlJL2Sp87rwylbwUH7f6o7M40IJsFqqW5guU1e60o+oU0Wg20Z+RQdHq6YkuX31e01O/CrRxFKkwjjfELljzIvqbwHpWmSLMt1zkb9wgCqfWp8CUnHg==)
+    username: ENC(UiWoYBTsDOu1i/NTBRmn1LozNC+7dxYF)
+    password: ENC(xpzpM5TsnNGON2NIuk8O6xoMZiAHA5eBk8vZ+JvTXIA=)
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 15
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 project:
   version: @project.version@
@@ -67,3 +64,5 @@ management:
     export:
       prometheus:
         enabled: true
+
+

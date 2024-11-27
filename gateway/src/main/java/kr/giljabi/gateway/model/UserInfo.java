@@ -25,20 +25,8 @@ public class UserInfo {
     @Column(name = "user_pw", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "use_flag", nullable = false, length = 1)
-    private char useFlag;
-
-    @Column(name = "phone_no", length = 14)
-    private String phoneNo;
-
-    @Column(name = "company_id", length = 10)
-    private String companyId;
-
-    @Column(name = "branch_id", length = 10)
-    private String branchId;
-
-    @Column(name = "shop_id")
-    private Integer shopId;
+    @Column(name = "terminal_id")
+    private Integer terminalId;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;

@@ -1,7 +1,11 @@
 gateway:
   was:
-    port: 8888
+    port: 9999
+    targetIp: localhost
+    protocol: http
   netty:
-    port: 8090
+    port: 9980
+    targetIp: localhost
+
 
 
