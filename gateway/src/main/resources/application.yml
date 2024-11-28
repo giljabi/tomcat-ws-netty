@@ -42,8 +42,8 @@ spring:
     password: ENC(xpzpM5TsnNGON2NIuk8O6xoMZiAHA5eBk8vZ+JvTXIA=)
     driver-class-name: org.postgresql.Driver
     hikari:
-      maximum-pool-size: 50
-      minimum-idle: 15
+      maximum-pool-size: 10
+      minimum-idle: 5 
   jpa:
     properties:
       hibernate:
