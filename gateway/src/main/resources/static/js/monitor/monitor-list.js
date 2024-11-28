@@ -148,7 +148,7 @@ heart-beat:60000,60000
 
         //tr object를 만들고...
         let newTerminal = $('<tr style="height: 50px;">').attr('id', recvData.terminalId); //새로운 tr object
-        const appendCell = (id, text) => newTerminal.append($('<td>').attr('id', id).text(text));
+        const appendCell = (id, text) => newTerminal.append($('<td style="word-break: break-word; white-space: normal;">').attr('id', id).text(text));
         if (terminal.length > 0) { // 이미 존재하는 terminalId인 경우는 send, recv시간이 중요
             appendCell('terminalId', recvData.terminalId);
             if (recvData.srType === 'request') {
@@ -172,27 +172,21 @@ heart-beat:60000,60000
         appendCell('command', recvData.command);
         appendCell('status', recvData.status);
         appendCell('srType', recvData.srType);
-        let cmdMessage = JSON.stringify(recvData.data);
-        console.log('recvData.data=' + cmdMessage);
-        let dataLength = cmdMessage.length;
-        if (dataLength > 0 && recvData.srType === 'response') { //클라이언트에서 보낸 경우
-            if (dataLength > 80)
-                appendCell('recvData', JSON.stringify(recvData.data).substring(0, 80) + '...'); //일부만 표시
-            else
-                appendCell('recvData', JSON.stringify(recvData.data));
-        }
 
-
-/*        if(recvData.data != null) {
-            console.log('recvData.data=' + JSON.stringify(recvData.data));
-            let dataLength = JSON.stringify(recvData.data).length;
+        //데모이므로 수신 데이터는 command: cmd에서만 있음
+        if(recvData.data != null) {
+            let cmdMessage = JSON.stringify(recvData.data);
+            console.log('recvData.data=' + cmdMessage);
+            let dataLength = cmdMessage.length;
             if (dataLength > 0 && recvData.srType === 'response') { //클라이언트에서 보낸 경우
-                if (dataLength > 100)
-                    appendCell('recvData', JSON.stringify(recvData.data).substring(0, 100) + '...'); //일부만 표시
-                else
-                    appendCell('recvData', JSON.stringify(recvData.data));
+                if (recvData.command == 'cmd') {
+                    appendCell('recvData', `cmd:${recvData.command}, fileListLength:${recvData.data.fileList.length}\n
+                        ${JSON.stringify(recvData.data.fileList[0]) + '...'}`);
+                } else {
+                    appendCell('recvData', '');
+                }
             }
-        }*/
+        }
 
         const { className, callFunction } = commandsEffect[recvData.command] || commandsEffect['default'];
         if(monitorType) {   //모니터링 타입 체크박스가 체크되어 있는 경우

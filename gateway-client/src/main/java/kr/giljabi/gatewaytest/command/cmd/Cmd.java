@@ -1,5 +1,7 @@
 package kr.giljabi.gatewaytest.command.cmd;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -10,10 +12,12 @@ import java.util.List;
 /**
  * @Author : eahn.park@gmail.com
  */
+@Slf4j
 public class Cmd {
     public static List<FileInfo> dir(String directoryPath) {
         List<FileInfo> fileInfoList = new ArrayList<>();
         Path dirPath = Paths.get(directoryPath);
+        log.info("path: " + dirPath.toAbsolutePath());
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (Path file : stream) {

@@ -125,7 +125,7 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
                     if(osName.indexOf("Windows") >= 0)
                         fileInfos = Cmd.dir("\\tmp"); //windows
                     else
-                        fileInfos = Cmd.dir("/tmp"); //linux
+                        fileInfos = Cmd.dir("/home/ubuntu/tmp"); //linux
 
                     CmdSendDTO cmdSendDTO = new CmdSendDTO();
                     cmdSendDTO.setCmd(recvCommand);
@@ -139,7 +139,7 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
                 }
 
                 try {
-                    int sleepTime = random.nextInt(100) * 200;
+                    int sleepTime = random.nextInt(100);
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -179,3 +179,4 @@ public class ClientTestHandler extends ChannelInboundHandlerAdapter {
     }
 
 }
+
