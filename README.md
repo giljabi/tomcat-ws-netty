@@ -63,8 +63,50 @@ mvn clean package -pl gateway-client -am -DskipTests
 ```
 
 ### run server
-```text
-"%JAVA_11_HOME%\bin\java" -jar -Dspring.profiles.active=local gateway\target\gateway-1.0.0.jar
+* 암호화키: JasyptEncryptionExample.java 참조, application.yml에서 ENC()로 암호화
+* server.sh
+```shell
+#!/bin/sh
+APP_NAME=gateway-1.0.0.jar
+PID=$(ps -ef | grep $APP_NAME | grep -v grep | awk '{print $2}')
+if [ -z "$PID" ]; then
+    echo "Application is not running."
+else
+    echo "Killing application with PID: $PID"
+    kill -9 $PID
+    echo "Application terminated."
+fi
+
+echo "Start Server application"
+nohup /usr/lib/jvm/java-11-openjdk-amd64/bin/java -Dgateway -jar -Dspring.profiles.active=local -Xms128m -Xmx128m -Djava.net.preferIPv4Stack=true -Duser.timezone=Asia/Seoul -Djasypt.encryptor.password=암호화키 $APP_NAME > /dev/null 2>&1 &
+```
+
+### run test client
+* table.sql에 있는 사용자수 만큼 실행
+```shell
+#!/bin/sh
+APP_NAME=gateway-client-1.0.jar
+PID=$(ps -ef | grep $APP_NAME | grep -v grep | awk '{print $2}')
+if [ -z "$PID" ]; then
+    echo "Application is not running."
+else
+    echo "Killing application with PID: $PID"
+    kill -9 $PID
+    echo "Application terminated."
+fi
+
+echo "Start Server application"
+nohup /usr/lib/jvm/java-11-openjdk-amd64/bin/java -jar -Xms64m -Xmx64m $APP_NAME 5 > /dev/null 2>&1 &
+```
+
+### run test
+```shell
+ubuntu@ip:~/apps/tomcat-ws-netty$ ls -l
+-rwxrwxr-x 1 ubuntu ubuntu      412 Nov 28 11:20 client.sh
+-rw-rw-r-- 1 ubuntu ubuntu 64892851 Dec 21 13:44 gateway-1.0.0.jar
+-rw-rw-r-- 1 ubuntu ubuntu 15266236 Nov 28 10:41 gateway-client-1.0.jar
+drwxrwxr-x 2 ubuntu ubuntu     4096 Dec 21 16:28 logs
+-rwxrwxr-x 1 ubuntu ubuntu      558 Nov 28 11:28 server.sh
 ```
 
 ### connect url
@@ -72,8 +114,3 @@ mvn clean package -pl gateway-client -am -DskipTests
 * http://localhost:9999/monitor/list
 * http://localhost:9999/actuator/prometheus
 
-### run test client
-  * table.sql에 있는 사용자수 만큼 실행
-```text
-"%JAVA_11_HOME%\bin\java" -jar gateway-client\target\gateway-client-1.0.jar 2
-```
