@@ -10,10 +10,7 @@
 * http://eahn.kr:9999/actuator/prometheus
 * http://eahn.kr:9999/doc/tomcat-ws-netty.mp4
 
-<video controls width="640" height="360">
-  <source src="http://eahn.kr:9999/doc/tomcat-ws-netty.mp4" type="video/mp4">
-  브라우저가 동영상을 지원하지 않습니다.
-</video>
+![tomcat-ws-netty.gif](doc/tomcat-ws-netty.gif)
 
 # README
 ### [gateway](gateway/README.md)
