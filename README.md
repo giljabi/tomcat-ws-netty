@@ -4,11 +4,10 @@
 
 
 ## demo
-* http://eahn.kr:9999/monitor/list
 * http://eahn.kr:9999/swagger-ui/index.html
-* http://eahn.kr:9999/monitor/list
 * http://eahn.kr:9999/actuator/prometheus
 * http://eahn.kr:9999/doc/tomcat-ws-netty.mp4
+* http://eahn.kr:9999/monitor/list
 
 ![tomcat-ws-netty.gif](doc/tomcat-ws-netty.gif)
 
