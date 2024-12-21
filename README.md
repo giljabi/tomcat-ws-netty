@@ -1,7 +1,19 @@
 # Gateway
-```text
-다음 버전은 클라이언트 장치로 RTOS를 만들어서 사용해보고 싶음..... 
-```
+* postgresql notify를 이용한 메세지 큐 통신
+* netty, websocket을 이용한 서버-클라이언트 통신
+
+
+## demo
+* http://eahn.kr:9999/monitor/list
+* http://eahn.kr:9999/swagger-ui/index.html
+* http://eahn.kr:9999/monitor/list
+* http://eahn.kr:9999/actuator/prometheus
+* http://eahn.kr:9999/doc/tomcat-ws-netty.mp4
+
+<video controls width="640" height="360">
+  <source src="http://eahn.kr:9999/doc/tomcat-ws-netty.mp4" type="video/mp4">
+  브라우저가 동영상을 지원하지 않습니다.
+</video>
 
 # README
 ### [gateway](gateway/README.md)
@@ -61,9 +73,9 @@ mvn clean package -pl gateway-client -am -DskipTests
 ```
 
 ### connect url
-* http://localhost:8888/swagger-ui/index.html
-* http://localhost:8888/monitor/list
-* http://localhost:8888/actuator/prometheus
+* http://localhost:9999/swagger-ui/index.html
+* http://localhost:9999/monitor/list
+* http://localhost:9999/actuator/prometheus
 
 ### run test client
   * table.sql에 있는 사용자수 만큼 실행
