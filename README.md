@@ -83,6 +83,7 @@ nohup /usr/lib/jvm/java-11-openjdk-amd64/bin/java -Dgateway -jar -Dspring.profil
 
 ### run test client
 * table.sql에 있는 사용자수 만큼 실행
+* client.sh
 ```shell
 #!/bin/sh
 APP_NAME=gateway-client-1.0.jar
